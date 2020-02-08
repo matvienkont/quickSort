@@ -21,12 +21,19 @@ const divisionAlgorithm = (array: number[], left: number, right: number): number
 	let rightBoundaryIndex: number = 0;
 
 	while (i <= k) {
+		/*
+	go through array to find elements array[i] greater-equal than array[pivot]
+*/
 		for (i; i <= pivot; i++) {
 			if (array[i] >= array[pivot]) {
 				leftBoundaryIndex = i;
 				break;
 			}
 		}
+
+		/*
+	go through array to find out if right boundary is less than left boundary or find elements array[k] < array[pivot]
+*/
 		for (k; k >= 0; k--) {
 			if (k < i) {
 				if (left == 2 && right == 5) {
@@ -38,6 +45,10 @@ const divisionAlgorithm = (array: number[], left: number, right: number): number
 				break;
 			}
 		}
+		/*
+	if left boundary are equal -> swap values under indeces left boundary and pivot
+	normally, you swap elements - one of them is lesser than the value under pivot index, the other is greater
+*/
 
 		if (leftBoundaryIndex == rightBoundaryIndex) {
 			swap(array, leftBoundaryIndex, pivot);
@@ -47,17 +58,31 @@ const divisionAlgorithm = (array: number[], left: number, right: number): number
 		}
 	}
 
+	/*
+	sort all the elements that are lesser than array[pivot]
+*/
 	if (pivot - 1 > left) divisionAlgorithm(array, left, pivot - 1);
+	/*
+	sort all the elements that are bigger than array[pivot]
+*/
 	if (pivot < right) divisionAlgorithm(array, pivot + 1, right);
 
 	return array;
 };
+
+/*
+	swap function a,b = b,a 
+*/
 
 const swap = (array: number[], i: number, j: number): void => {
 	var temp = array[i];
 	array[i] = array[j];
 	array[j] = temp;
 };
+
+/*
+	test sorting function
+*/
 
 var arr = [];
 for (let i = 0; i < 2; i++) {
